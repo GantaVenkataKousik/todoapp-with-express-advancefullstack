@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Overdue Todos</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>dueDate</th>
+            <th>completed</th>
+        </tr>
+    
+        <% 
+            var overdueCount = 0;
+
+            for (var i = 0; i < allToDos.length; i++) {
+                var dueDate = new Date(allToDos[i].dueDate);
+                var currentDate = new Date();
+    
+                if (dueDate < currentDate) {
+                    overdueCount++;
+        %>
+            <tr>
+                <td><%= allToDos[i].title %></td>
+                <td><%= allToDos[i].dueDate %></td>
+                <td><%= allToDos[i].completed %></td>
+            </tr>
+        <% 
+                }
+            } 
+        %>
+    </table>
+    
+    <p>Number of Overdue Todos: <%= overdueCount %></p>
+
+    <h2>Todos Due Today</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>dueDate</th>
+            <th>completed</th>
+        </tr>
+    
+        <% 
+            var todayCount = 0;
+
+            for (var i = 0; i < allToDos.length; i++) {
+                var dueDate = new Date(allToDos[i].dueDate);
+                var currentDate = new Date();
+    
+                if (dueDate.toDateString() === currentDate.toDateString()) {
+                    todayCount++;
+        %>
+            <tr>
+                <td><%= allToDos[i].title %></td>
+                <td><%= allToDos[i].dueDate %></td>
+                <td><%= allToDos[i].completed %></td>
+            </tr>
+        <% 
+                }
+            } 
+        %>
+    </table>
+    
+    <p>Number of Todos Due Today: <%= todayCount %></p>
+
+    <h2>Todos Due Later</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>dueDate</th>
+            <th>completed</th>
+        </tr>
+    
+        <% 
+            var laterCount = 0;
+
+            for (var i = 0; i < allToDos.length; i++) {
+                var dueDate = new Date(allToDos[i].dueDate);
+                var currentDate = new Date();
+    
+                if (dueDate > currentDate) {
+                    laterCount++;
+        %>
+            <tr>
+                <td><%= allToDos[i].title %></td>
+                <td><%= allToDos[i].dueDate %></td>
+                <td><%= allToDos[i].completed %></td>
+            </tr>
+        <% 
+                }
+            } 
+        %>
+    </table>
+    
+    <p>Number of Todos Due Later: <%= laterCount %></p>
+</body>
+</html>

@@ -7,24 +7,10 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <%- include('header.ejs') %>
-   
-    <table> 
-        <tr>
-           <th>Title</th>
-           <th>dueDate</th>
-           <th>completed</th>
-        </tr>
-        
-        <% for( var i = 0 ; i < allToDos.length; i++){ %>
-            <tr>
-                <td><%= allToDos[i].title %></td>
-                <td><%= allToDos[i].dueDate %></td>
-                <td><%= allToDos[i].completed %></td>
-            </tr>
-            
-        <% } %>
-    </table>
 
+   <h1>To Do Home</h1>
+
+    <%- include('todos.ejs') %>
+   
 </body>
 </html>
