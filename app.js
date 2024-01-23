@@ -1,3 +1,11 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable brace-style */
+/* eslint-disable keyword-spacing */
+/* eslint-disable space-before-blocks */
+/* eslint-disable arrow-spacing */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable comma-spacing */
+/* eslint-disable semi */
 /* eslint-disable eol-last */
 /* eslint-disable comma-dangle */
 /* eslint-disable object-curly-spacing */
@@ -7,7 +15,24 @@
 const express = require("express");
 const app = express();
 const { Todo } = require("./models");
+
+const path = require("path");
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.set("view engine", "ejs");
+
+app.get("/", async (request, response) => {
+  const allToDos = await Todo.showAll();
+  if (request.accepts("html")) {
+    response.render("index", {
+      allToDos,
+    });
+  } else {
+    return response.json(allToDos);
+  }
+});
 
 app.get("/todos", async (request, response) => {
   try {
