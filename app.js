@@ -20,6 +20,7 @@ const path = require("path");
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
 
@@ -62,6 +63,7 @@ app.post("/todos", async (request, response) => {
 
 app.put("/todos/:id/markAsCompleted", async (request, response) => {
   const todo = await Todo.findByPk(request.params.id);
+  console.log(todo);
   try {
     const updatedTodo = await todo.markAsCompleted();
     return response.json(updatedTodo);
